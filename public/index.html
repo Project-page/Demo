@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Socket.io Demo</title>
+      <meta charset="utf-8">
+                <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+         <h1>User feedback for Eye-based interection </h1>	
+         <p id="text">Thank you so much for participating in the survey</p>
+
+         <p id="buttonCount">The button has been clicked 0 times.</p>
+		 <button onclick="buttonClicked()">Click me</button>
+		 <script src="/socket.io/socket.io.js"></script>
+		 <script>
+             var socket = io.connect();
+             
+             function buttonClicked(){
+			   socket.emit('clicked');
+			 }
+			 
+			 //when we receive buttonUpdate, do this
+			 socket.on('buttonUpdate', function(data){
+				 document.getElementById("buttonCount").innerHTML = 'The button has been clicked ' + data + ' times.';
+			 });
+		</script> 
+   </body>
+</html>
